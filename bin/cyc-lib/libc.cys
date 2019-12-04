@@ -1864,8 +1864,8 @@ mqueue.h:
 
 // Defines a structure containing a void *
 // Not supported yet
-ndbm.h:
-;
+//ndbm.h:
+//;
 
 // Defines a structure containing a char *
 // Not supported yet
@@ -5086,8 +5086,8 @@ hstub daylight {
 
 // Tracing
 // Not supported yet
-trace.h:
-;
+//trace.h:
+//;
 
 // User context
 // Defines a pointer-containing struct, not supported yet
