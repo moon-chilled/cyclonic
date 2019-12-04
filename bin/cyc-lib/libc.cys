@@ -2209,7 +2209,7 @@ hstub getpwuid {
 // Our parser dies on it in Linux
 // Uses strings extensively, probably best to rewrite in Cyclone
 // Not supported yet
-regexp.h:
+regex.h:
 ;
 
 // Real time
