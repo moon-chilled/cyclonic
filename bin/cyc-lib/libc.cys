@@ -3717,13 +3717,6 @@ hstub unlockpt {
 // strings.h:
 // ;
 
-stropts.h:
-hstub {
-  // FIX: stropts.h is not yet supported.
-  // The problem is that the strbuf structure has a char * field. 
-}
-;
-
 sys/dir.h:
 hstub {
   #include <dirent.h>
