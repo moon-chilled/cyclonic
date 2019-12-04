@@ -24,6 +24,7 @@
 /config/arch
 /core
 /config.log
+/config.status
 /cyclone-.*.tar.gz
 /doc/cyclone.gif
 /doc/web
@@ -53,3 +54,11 @@
 /tools/cycocamllex
 /unupdate
 /unupdate-backup
+/gc
+
+# Vim turds
+.*.swp
+.*.swo
+.*.swn
+.*.swm
+.*.swl
