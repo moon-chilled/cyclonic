@@ -41,10 +41,11 @@ region_dir = ../libcompat
 
 engine_dir = ../engine
 banshee_bindir = ../bin
+banshee_exe = ../bin/banshee.exe
 
 DYCKCFL = dyckcfl
 
-TARGETS =  $(DYCKCFL).o mr_$(DYCKCFL).o 
+TARGETS =  $(DYCKCFL).o mr_$(DYCKCFL).o $(DYCKCFL)_terms.h $(DYCKCFL)_spec.o $(DYCKCFL)_terms.o $(DYCKCFL)_terms.c
 
 TAGFILES = $(wildcard *.c) $(wildcard *.h)
 
@@ -52,15 +53,24 @@ CC = gcc
 
 ifdef DEBUG
 CFLAGS = -I$(engine_dir) -I$(region_dir) -Ddeletes= -Dtraditional= \
-         -Dsameregion= -Dparentptr= -DNONSPEC -Wall -Werror -g -pg
+         -Dsameregion= -Dparentptr= -Wall -Werror -g -pg
 else
 CFLAGS = -I$(engine_dir) -I$(region_dir) -Ddeletes= -Dtraditional= \
-         -Dsameregion= -Dparentptr= -DNONSPEC -Wall -Werror 
+         -Dsameregion= -Dparentptr= -Wall -Werror 
 endif
 
 .PHONY: clean 
 
 all: $(TARGETS) 
+
+mr_$(DYCKCFL).o: 
+	$(CC) -c $(CFLAGS) -DNONSPEC mr_$(DYCKCFL).c
+
+$(DYCKCFL).o:
+	$(CC) -c $(CFLAGS) -DNONSPEC $(DYCKCFL).c
+
+$(DYCKCFL)_terms.h: $(DYCKCFL)_terms.bsp
+	$(banshee_exe) $(DYCKCFL)_terms.bsp
 
 TAGS: $(TAGFILES)
 	etags $(TAGFILES)
@@ -76,4 +86,4 @@ TAGS: $(TAGFILES)
 #	$(CC) -dynamiclib -o libjdyckcfl.jnilib dyckcfl.o JDyckCFLImp.o $(engine_dir)/libnsengine.a $(region_dir)/libregions.a -framework JavaVM
 
 clean:
-	rm -f $(TARGETS) *~ JDyckCFL.class JDyckCFLImp.o libjdyckcfl.jnilib
+	rm -f $(TARGETS) *~ JDyckCFL.class JDyckCFLImp.o libjdyckcfl.jnilib 

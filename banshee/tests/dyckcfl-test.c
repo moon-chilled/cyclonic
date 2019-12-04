@@ -29,9 +29,14 @@
  */
 
 #include <assert.h>
+#ifndef SPEC
 #include "nonspec.h"
+#endif
 #include "dyckcfl.h"
+
+#ifndef SPEC
 #include "mr_dyckcfl.h"
+#endif
 
 bool test_dyck_clustering = TRUE;
 bool test_dyck_contra = TRUE;
@@ -48,9 +53,12 @@ static void myassert(int a) {
 static void test_dyck_isomorphism()
 {
   dyck_node d0,d1,d2,d3,d4,d5,d6,d7,d8,d9;
+
+#ifndef SPEC
   int indices[2] = {0,1};
   dyck_node nodes[2] = {NULL,NULL};
   dyck_node c0,c1,c2,c3,c4,c5;
+#endif /* SPEC */
   dyck_node e0,e1,e2,e3,e4,e5;
 //   flag_dyck_print_constraints = 1;
   
@@ -75,9 +83,12 @@ static void test_dyck_isomorphism()
   make_dyck_close_edge(d8,d9,3);
   mark_dyck_node_global(d8);
 
+
+
 //   flag_dyck_print_constraints = 1;
 
   // Clustering test
+#ifndef SPEC
   if (test_dyck_clustering) {
     c0 = make_tagged_dyck_node("c0");
     c1 = make_tagged_dyck_node("c1");
@@ -92,6 +103,7 @@ static void test_dyck_isomorphism()
     make_dyck_close_edge_for_cluster(c3,c4,0);
     make_dyck_close_edge_for_cluster(c3,c5,1);
   }
+#endif /* SPEC */
 
   if (test_dyck_contra) {
     e0 = make_tagged_dyck_node("e0");
@@ -157,6 +169,7 @@ static void test_dyck_isomorphism()
   //myassert(!dyck_check_reaches(d5,d9)); // no matched reachability using a global
   myassert(dyck_check_reaches(d8,d9)); // check for promotion of p reachability to matched
 
+#ifndef SPEC
   if (test_dyck_clustering) {
     myassert(dyck_check_reaches(c0,c4));
     myassert(dyck_check_reaches(c1,c5));
@@ -174,7 +187,9 @@ static void test_dyck_isomorphism()
     myassert(!dyck_check_reaches(e3,e4));
     myassert(!dyck_check_reaches(e5,e0));
   }
+#endif /* SPEC */
 
+  dyck_pn_reaches(d9);
   // Print the closed graph
 /*   { */
 /*     FILE *f = fopen("closed_graph.dot","w"); */
@@ -187,6 +202,7 @@ static void test_dyck_isomorphism()
   printf("Passed dyck isomorphism test\n");
 }
 
+#ifndef SPEC
 static void test_dyck_reduction()
 {
   mr_dyck_node d0,d1,d2,d3,d4,d5,d6,d7,d8,d9;//,d10,d11;
@@ -268,18 +284,26 @@ static void test_dyck_reduction()
   
   printf("Passed dyck reduction test\n");
 }
-
+#endif /* SPEC */
 
 
 int main()
 {
+#ifndef SPEC
   nonspec_init();
+#endif
   dyck_init(TRUE);
-  flag_merge_projections = FALSE;
+  // flag_merge_projections = FALSE;
+
+#ifndef SPEC
   mr_dyck_init(TRUE,NULL);
+#endif
 
   test_dyck_isomorphism();
+
+#ifndef SPEC
   test_dyck_reduction();
+#endif
 
   /* Do it one more time to test queries interspersed between
      constraint additions */

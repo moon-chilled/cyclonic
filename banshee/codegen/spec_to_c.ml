@@ -30,6 +30,8 @@
 
 open Cgen
 open Engspec
+
+let cfst ((a,b,c) : conid) = a
       
 let foldr f =
   let rec localfun y l =
@@ -63,6 +65,9 @@ module Env : ENV =
       |	C of conid
     type map = res list
     exception Duplicate of string 
+	let match_gopt = function
+		| Some name, Some name' -> name = name'
+		| _ -> false
     let error e = e ^ " is multiply defined" 
     let lookup_exprid e m = 
       try 
@@ -74,22 +79,24 @@ module Env : ENV =
       match (lookup_exprid e m) with
       | None -> E(e,s) :: m
       |	Some _ -> raise (Duplicate (error e))
-    let lookup_conid c m = 
+    let lookup_conid (c,_,g) m = 
       try 
-	(match (List.find (function C(c') -> c = c' | _ -> false) m) with
+	(match (List.find (function C((c',_,g')) ->( match_gopt(g,g') or (c = c')) | _ -> false) m) with
 	| _ -> true ) with
       |	_ -> false
     let insert_conid (c,m) = 
-      if (lookup_conid c m) then raise (Duplicate (error c)) else C c :: m
+      if (lookup_conid c m) then raise (Duplicate (error (cfst c))) else C c :: m
     let empty_env = []
     let plus (m1,m2) = 
       foldl (function (E(e,s),m) -> insert_exprid(e,s,m) 
 	  | (C c,m) -> insert_conid(c,m)) m1 m2
     let exprids_with_sorts env =  foldl(function (E (e,s), a) -> (e,s) :: a
       | (C _, a) -> a) [] env
-  end
+  end                 
 
 let gen_opaque_type exprid header = header#add_tdecl (opaque exprid)
+
+let gen_soln_entry_type exprid header = header#add_tdecl (struct_decl (exprid ^ "_entry_") [( no_qual (Ident exprid), "e");(no_qual (Ident "annotation"), "a")] );( header#add_tdecl( typedef (no_qual (Pointer (no_qual (Struct (exprid ^ "_entry_"))))) (exprid ^ "_entry")))
 
 let gen_dataspec env dataspec header source = 
   let conids body = List.map (function (a,b) -> a) body in 
@@ -98,10 +105,11 @@ let gen_dataspec env dataspec header source =
       let env' = Env.insert_exprid(e,s,env) in
       foldl (function (c,env) -> Env.insert_conid(c,env)) env' (conids body))
       Env.empty_env dataspec in
-  let env'' = Env.plus (env,env') in
+  (*let env'' = Env.plus (env,env') in*)
   let _ = 
     List.map (function (e,s,body) -> 
       (gen_opaque_type e header; 
+	   gen_soln_entry_type e header;
        s#gen_sort_ops source header e;
        s#gen_con_ops source header (e,body))) dataspec
 (*
@@ -135,11 +143,13 @@ let gen_preamble env sigid header source  =
   let inc9 = include_header true  "linkage.h" in
   let inc10 = include_header true "hash.h" in
   let inc11 = include_header true "banshee_region_persist_kinds.h" in
+  let inc12 = include_header true "annotations.h" in
   let flag =
     var (no_qual Int) "flag_hash_cons" (Some Extern) ; in 
-  header#add_includes [start_cmnt;hdr_ifndef;hdr_def;inc1;inc5;inc6;inc9;inc10;flag];
+  header#add_includes [start_cmnt;hdr_ifndef;hdr_def;inc1;inc5;inc6;inc9;inc10;inc12];
   source#add_includes [start_cmnt;inc1;inc2;inc3;inc4;inc5;inc6;inc7;inc8;inc10;inc11];
-  header#add_macro (macro "EXTERN_C_BEGIN")
+  header#add_macro (macro "EXTERN_C_BEGIN");
+  header#add_gdecls [flag]
 
 let gen_postamble env strid header source (sorts : (exprid*sort_gen) list) = 
   let return = void in
