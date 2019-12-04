@@ -1,8 +1,11 @@
-/*
- * Test that overwrite error detection works reasonably.
- */
-#define GC_DEBUG
-#include <gc.h>
+/* Test that overwrite error detection works reasonably.        */
+
+#ifndef GC_DEBUG
+# define GC_DEBUG
+#endif
+
+#include "gc.h"
+
 #include <stdio.h>
 
 #define COUNT 7000
@@ -10,19 +13,18 @@
 
 char * A[COUNT];
 
-int main ()
+int main(void)
 {
-        int i;
-	char *p;
+  int i;
+  char *p;
 
-	GC_INIT();
+  GC_INIT();
 
-        for (i = 0; i < COUNT; ++i) {
-		A[i] = p = GC_MALLOC(SIZE);
+  for (i = 0; i < COUNT; ++i) {
+     A[i] = p = (char*)GC_MALLOC(SIZE);
 
-		if (i%3000 == 0) GC_gcollect();
-		if (i%5678 == 0) p[SIZE + i/2000] = 42;
-	}
-	return 0;
+     if (i%3000 == 0) GC_gcollect();
+     if (i%5678 == 0 && p != 0) p[SIZE + i/2000] = 42;
+  }
+  return 0;
 }
-
