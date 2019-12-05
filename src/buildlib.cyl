@@ -1872,7 +1872,7 @@ and block_comment = parse /* returns 1 if more to do, 0 if all done */
       }
       out_file = (FILE@)maybe;
       fprintf(out_file,
-              "#error -- %s is not supported on this platform\n",
+              "#warning -- %s is not supported on this platform\n",
               filename);
       fclose(out_file);
       //      fprintf(stderr,"Warning: %s will not be supported on this platform\n",

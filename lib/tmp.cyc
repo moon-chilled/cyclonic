@@ -4,14 +4,13 @@
 
 using Core;
 
-namespace Cstdio {
 extern "C" {
 struct __abstractFILE *tmpfile();
 Cstring	tmpnam(Cstring);
-}}
+}
 
 FILE *tmpfile() {
-  struct Cstdio::__abstractFILE *cf = Cstdio::tmpfile();
+  struct __abstractFILE *cf = Cstdio::tmpfile();
   return fromCfile(cf);
 }
 

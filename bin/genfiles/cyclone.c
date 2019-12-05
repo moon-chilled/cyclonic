@@ -1708,9 +1708,9 @@ _tag_fat("",sizeof(char),1U);_T2B=Cyc_strcmp(_T29,_T2A);if(_T2B!=0)goto _TL156;_
 # 1481 "cyclone.cyc"
 if(!_T2D)goto _TL158;_T2C="";goto _TL159;_TL158: _T2C=" -E";_TL159:{const char*dash_E=_T2C;{struct Cyc_String_pa_PrintArg_struct _TDD;_TDD.tag=0;
 # 1483
-_TDD.f1=cyclone_cc;_T2F=_TDD;}{struct Cyc_String_pa_PrintArg_struct _TDD=_T2F;{struct Cyc_String_pa_PrintArg_struct _TDE;_TDE.tag=0;_TDE.f1=target_cflags;_T30=_TDE;}{struct Cyc_String_pa_PrintArg_struct _TDE=_T30;{struct Cyc_String_pa_PrintArg_struct _TDF;_TDF.tag=0;{const char*_TE0=dash_E;_T33=(void*)_TE0;_T34=(void*)_TE0;_T35=_get_zero_arr_size_char(_T34,1U);_T32=_tag_fat(_T33,sizeof(char),_T35);}_TDF.f1=_T32;_T31=_TDF;}{struct Cyc_String_pa_PrintArg_struct _TDF=_T31;{struct Cyc_String_pa_PrintArg_struct _TE0;_TE0.tag=0;_TE0.f1=specs_file;_T36=_TE0;}{struct Cyc_String_pa_PrintArg_struct _TE0=_T36;void*_TE1[4];_TE1[0]=& _TDD;_TE1[1]=& _TDE;_TE1[2]=& _TDF;_TE1[3]=& _TE0;_T37=
+_TDD.f1=cyclone_cc;_T2F=_TDD;}{struct Cyc_String_pa_PrintArg_struct _TDD=_T2F;{struct Cyc_String_pa_PrintArg_struct _TDE;_TDE.tag=0;_TDE.f1=target_cflags;_T30=_TDE;}{struct Cyc_String_pa_PrintArg_struct _TDE=_T30;{struct Cyc_String_pa_PrintArg_struct _TDF;_TDF.tag=0;{const char*_TE0=dash_E;_T33=(void*)_TE0;_T34=(void*)_TE0;_T35=_get_zero_arr_size_char(_T34,1U);_T32=_tag_fat(_T33,sizeof(char),_T35);}_TDF.f1=_T32;_T31=_TDF;}{struct Cyc_String_pa_PrintArg_struct _TDF=_T31;{struct Cyc_String_pa_PrintArg_struct _TE0;_TE0.tag=0;_TE0.f1=specs_file;_T36=_TE0;}{struct Cyc_String_pa_PrintArg_struct _TE0=_T36;void*_TE1[3];_TE1[0]=& _TDD;_TE1[1]=& _TDE;_TE1[2]=& _TDF;_T37=
 # 1482
-_tag_fat("%s %s -w -x c%s -specs %s",sizeof(char),26U);_T38=_tag_fat(_TE1,sizeof(void*),4);_T2E=Cyc_aprintf(_T37,_T38);}}}}Cyc_set_cpp(_T2E);}goto _TL157;_TL156: _TL157:
+_tag_fat("%s %s -w -x c%s",sizeof(char),26U);_T38=_tag_fat(_TE1,sizeof(void*),3);_T2E=Cyc_aprintf(_T37,_T38);}}}}Cyc_set_cpp(_T2E);}goto _TL157;_TL156: _TL157:
 # 1485
  if(Cyc_cyclone_files!=0)goto _TL15A;if(Cyc_ccargs!=0)goto _TL15A;_T39=Cyc_stderr;_T3A=
 _tag_fat("missing file\n",sizeof(char),14U);_T3B=_tag_fat(0U,sizeof(void*),0);Cyc_fprintf(_T39,_T3A,_T3B);

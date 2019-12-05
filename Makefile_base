@@ -31,7 +31,7 @@ $(BT)/libcycboot.a: $(addprefix $(BT)/, $(LIBCYCBOOT_FILES))
 endif
 
 ########################################################################
-LIBCYC_FILES = include/cycstubs.$(O) include/cstubs.$(O) $(O_BOOT_LIBS) $(O_LIBS)
+LIBCYC_FILES = include/cycstubs.$(O) include/cstubs.$(O) $(O_BOOT_LIBS) $(O_LIBS) boot_cstubs.$(O) boot_cycstubs.$(O)
 $(BB)/libcyc.a: $(addprefix $(BB)/, $(LIBCYC_FILES))
 	$(ARCHIVE)
 $(BB)/gdb/libcyc.a: $(addprefix $(BB)/gdb/, $(LIBCYC_FILES))

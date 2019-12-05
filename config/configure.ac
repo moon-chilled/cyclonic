@@ -12,10 +12,10 @@ AC_CONFIG_AUX_DIR(config)
 AC_CANONICAL_TARGET
 
 # quit if user wants to cross-compile the compiler itself
-if [[ "$build" != "$host" ]]; then
-    echo "Cross-compiling the Cyclone compiler itself is not supported"
-    exit 1
-fi
+#if [[ "$build" != "$host" ]]; then
+#    echo "Cross-compiling the Cyclone compiler itself is not supported"
+#    exit 1
+#fi
 
 # quit if we know the architecture won't work
 case "$build_os" in
@@ -124,11 +124,6 @@ fi
 AC_CHECK_SIZEOF(int)
 if [[ "$ac_cv_sizeof_int" != 4 ]]; then
   echo "ERROR: cannot build because sizeof(int) == $ac_cv_sizeof_int != 4"
-  exit
-fi
-AC_CHECK_SIZEOF(long)
-if [[ "$ac_cv_sizeof_long" != 4 ]]; then
-  echo "ERROR: cannot build because sizeof(long) == $ac_cv_sizeof_long != 4"
   exit
 fi
 AC_CHECK_SIZEOF(long long)

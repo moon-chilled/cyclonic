@@ -17,6 +17,8 @@
 /bin/genfiles/src
 /bin/buildlib
 /bin/cyclone
+/bin/cycdoc
+/bin/stringify
 /bin/lib
 /build
 /config/arch

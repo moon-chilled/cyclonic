@@ -2254,7 +2254,7 @@ return 1;_TL1FE:
 # 1876
 _T2DA.f1=_T2D1;_T2D0=_T2DA;}{struct Cyc_String_pa_PrintArg_struct _T2DA=_T2D0;void*_T2DB[1];_T2DB[0]=& _T2DA;_T2D5=out_file;_T2D6=
 # 1875
-_tag_fat("#error -- %s is not supported on this platform\n",sizeof(char),48U);_T2D7=_tag_fat(_T2DB,sizeof(void*),1);Cyc_fprintf(_T2D5,_T2D6,_T2D7);}
+_tag_fat("#warning -- %s is not supported on this platform\n",sizeof(char),50U);_T2D7=_tag_fat(_T2DB,sizeof(void*),1);Cyc_fprintf(_T2D5,_T2D6,_T2D7);}
 # 1877
 Cyc_fclose(out_file);_T2D8=
 # 1880

@@ -243,3 +243,5 @@ endif
 ifndef NODEPS
 -include $(addsuffix .d, $(CYCLONE_BOOT_LIBS) $(CYCLONE_LIBS) $(CYCLONE_SRCS) cycdoc buildlib)
 endif
+
+include ../../Makefile_base

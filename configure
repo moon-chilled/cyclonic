@@ -2297,10 +2297,10 @@ test -n "$target_alias" &&
   program_prefix=${target_alias}-
 
 # quit if user wants to cross-compile the compiler itself
-if [ "$build" != "$host" ]; then
-    echo "Cross-compiling the Cyclone compiler itself is not supported"
-    exit 1
-fi
+#if [[ "$build" != "$host" ]]; then
+#    echo "Cross-compiling the Cyclone compiler itself is not supported"
+#    exit 1
+#fi
 
 # quit if we know the architecture won't work
 case "$build_os" in
@@ -3499,43 +3499,6 @@ _ACEOF
 
 if [ "$ac_cv_sizeof_int" != 4 ]; then
   echo "ERROR: cannot build because sizeof(int) == $ac_cv_sizeof_int != 4"
-  exit
-fi
-# The cast to long int works around a bug in the HP C Compiler
-# version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-# This bug is HP SR number 8606223364.
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking size of long" >&5
-$as_echo_n "checking size of long... " >&6; }
-if ${ac_cv_sizeof_long+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if ac_fn_c_compute_int "$LINENO" "(long int) (sizeof (long))" "ac_cv_sizeof_long"        "$ac_includes_default"; then :
-
-else
-  if test "$ac_cv_type_long" = yes; then
-     { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error 77 "cannot compute sizeof (long)
-See \`config.log' for more details" "$LINENO" 5; }
-   else
-     ac_cv_sizeof_long=0
-   fi
-fi
-
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_sizeof_long" >&5
-$as_echo "$ac_cv_sizeof_long" >&6; }
-
-
-
-cat >>confdefs.h <<_ACEOF
-#define SIZEOF_LONG $ac_cv_sizeof_long
-_ACEOF
-
-
-if [ "$ac_cv_sizeof_long" != 4 ]; then
-  echo "ERROR: cannot build because sizeof(long) == $ac_cv_sizeof_long != 4"
   exit
 fi
 # The cast to long int works around a bug in the HP C Compiler
