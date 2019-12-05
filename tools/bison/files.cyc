@@ -32,6 +32,12 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "gram.h"
 #include <string.h>
 
+// FIXME TODO XXX temporary stubs until we can parse stdio.h again
+extern "C" {
+	void perror(const char ?s);
+	void rewind(FILE @stream);
+}
+
 FILE *finput=NULL;
 FILE *foutput=NULL;
 FILE *fdefines=NULL;

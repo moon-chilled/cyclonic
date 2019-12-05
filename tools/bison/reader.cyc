@@ -37,6 +37,12 @@ The entry point is reader().  */
 #include "gram.h"
 #include "machine.h"
 
+// FIXME TODO XXX temporary stubs until we can parse stdio.h again
+extern "C" {
+	int atoi(const char ?nptr);
+	int sprintf(char *str, const char *fmt, ...);
+}
+
 /* DJG: I think the parser generator is still busted if you try to
  * re-define YYLTYPE.  Note that = is used on locs, so they shouldn't
  * be pointers!
@@ -1855,7 +1861,7 @@ gensym()
 {
   bucket *sym;
 
-  sprintf((char ? @nozeroterm )token_buffer, "@%d", ++gensym_count);
+  sprintf(/*(char ? @nozeroterm )*/token_buffer, "@%d", ++gensym_count);
   sym = getsym(token_buffer);
   sym->class = SNTERM;
   sym->value = (short)nvars++;

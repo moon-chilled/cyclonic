@@ -52,7 +52,7 @@ $(BINDIR)/$(PROG): $(PROG)
 # The -B tells the compiler to use the right gc.a and runtime_cyc.o
 # The -L tells the compiler to use the right libcyc.a
 $(PROG): $(O_SRCS) $(CYC_LIB_PATH)/$(CYCLIB)
-	$(CYCC) -L$(CYC_LIB_PATH) -B$(CYC_LIB_PATH)/cyc-lib $(LC_FLAG) -o $@ $(O_SRCS) $(LDFLAGS)
+	$(CYCC) -L$(CYC_LIB_PATH) -B$(CYC_LIB_PATH)/cyc-lib $(LC_FLAG) -o $@ $(O_SRCS) $(LDFLAGS) -v
 
 # This file is different to pass the parser file names to the compiler.
 files.o: files.cyc

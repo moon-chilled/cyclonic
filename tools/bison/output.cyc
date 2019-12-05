@@ -111,6 +111,10 @@ YYNTBASE = ntokens.
 #include "gram.h"
 #include "state.h"
 
+extern "C" {
+	void rewind(FILE @stream);
+}
+
 extern int debugflag;
 extern int nolinesflag;
 extern int noparserflag;
